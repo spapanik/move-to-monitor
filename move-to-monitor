@@ -65,10 +65,13 @@ wmctrl -ir $window_id -b remove,maximized_vert,maximized_horz
 xdotool windowmove $window_id $new_x $new_y
 
 case "${window_state}" in
-    *_NET_WM_STATE_MAXIMIZED_VERT*)
+    *MAXIMIZED_HORZ*MAXIMIZED_VERT* | *MAXIMIZED_VERT*MAXIMIZED_HORZ*)
+        wmctrl -ir $window_id -b add,maximized_vert,maximized_horz
+    ;;
+   *MAXIMIZED_VERT*)
         wmctrl -ir $window_id -b add,maximized_vert
     ;;
-    *_NET_WM_STATE_MAXIMIZED_HORZ*)
+    *MAXIMIZED_HORZ*)
         wmctrl -ir $window_id -b add,maximized_horz
     ;;
 esac
